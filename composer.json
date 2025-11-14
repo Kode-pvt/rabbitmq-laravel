@@ -38,7 +38,7 @@
     }
   ],
   "require": {
-    "php": ">=8.4",
+    "php": ">=8.2",
     "php-amqplib/php-amqplib": "^3.7",
     "illuminate/contracts": "^12.0",
     "illuminate/support": "^12.0",
