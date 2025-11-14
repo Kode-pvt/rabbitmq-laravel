@@ -1,0 +1,29 @@
+<?php
+
+namespace {{ namespace }};
+
+use KodePvt\RabbitmqLaravel\RPC\Server;
+
+class {{ class }} extends Server
+{
+    /**
+    *  Message to publish as the reponse of the request.
+    *
+    * @return string
+    */
+    protected function reply(): string
+    {
+        return "";
+    }
+
+    /**
+     * Handle incoming RabbitMQ request.
+     *
+     * @param $request
+     * @return void
+     */
+    public function handle($request): void
+    {
+        //
+    }
+}

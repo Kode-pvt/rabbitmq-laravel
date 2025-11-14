@@ -1,0 +1,39 @@
+<?php
+
+namespace {{ namespace }};
+
+use KodePvt\RabbitmqLaravel\RPC\Client;
+
+class {{ class }} extends Client
+{
+    /**
+    *  Message to publish
+    *
+    * @return string
+    */
+    protected function message(): string
+    {
+        return "";
+    }
+
+    /**
+     *  Payload to publish along with the message
+     *
+     * @return array
+     */
+    protected function data(): string
+    {
+        return json_encode([]);
+    }
+
+    /**
+     * Handle incoming RabbitMQ response.
+     *
+     * @param $response
+     * @return void
+     */
+    public function handle($response): void
+    {
+        //
+    }
+}

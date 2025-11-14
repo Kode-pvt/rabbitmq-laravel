@@ -1,0 +1,49 @@
+{
+    "name": "kode-pvt/rabbitmq-laravel",
+    "version": "1.1.0",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "KodePvt\\RabbitmqLaravel\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "KodePvt\\RabbitmqLaravel\\RabbitmqLaravelServiceProvider"
+            ],
+            "aliases": {
+                "RabbitMQ": "KodePvt\\RabbitmqLaravel\\Facades\\RabbitMQ"
+            }
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "KodePvt\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Nehal Ahmed Khan",
+            "email": "nak.work.dev@gmail.com"
+        }
+    ],
+    "require": {
+        "php-amqplib/php-amqplib": "^3.7",
+        "illuminate/contracts": "^12.37",
+        "illuminate/support": "^12.37",
+        "illuminate/console": "^12.37"
+    },
+    "require-dev": {
+        "pestphp/pest": "^4.1",
+        "mockery/mockery": "^1.6",
+        "orchestra/testbench": "^10.6",
+        "pestphp/pest-plugin-laravel": "^4.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
+}

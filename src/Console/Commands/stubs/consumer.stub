@@ -1,0 +1,20 @@
+<?php
+
+namespace {{ namespace }};
+
+use KodePvt\RabbitmqLaravel\Services\Consumers\Consumer;
+use PhpAmqpLib\Message\AMQPMessage;
+
+class {{ class }} extends Consumer
+{
+    /**
+     * Handle incoming RabbitMQ message.
+     *
+     * @param AMQPMessage $message
+     * @return void
+     */
+    public function handle(AMQPMessage $message): void
+    {
+        // Log::info("msg: {$message->getBody()}");
+    }
+}
