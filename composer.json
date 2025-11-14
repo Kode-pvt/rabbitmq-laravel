@@ -3,6 +3,14 @@
   "version": "1.1.0",
   "type": "library",
   "license": "MIT",
+  "description": "A lightweight RabbitMQ integration package for Laravel 12.",
+  "keywords": [
+    "laravel",
+    "rabbitmq",
+    "queue",
+    "amqp",
+    "messaging"
+  ],
   "autoload": {
     "psr-4": {
       "KodePvt\\RabbitmqLaravel\\": "src/"
@@ -30,10 +38,11 @@
     }
   ],
   "require": {
+    "php": ">=8.4",
     "php-amqplib/php-amqplib": "^3.7",
-    "illuminate/contracts": "^11.0 | ^12.0",
-    "illuminate/support": "^11.0 | ^12.0",
-    "illuminate/console": "^11.0 | ^12.0"
+    "illuminate/contracts": "^12.0",
+    "illuminate/support": "^12.0",
+    "illuminate/console": "^12.0"
   },
   "require-dev": {
     "pestphp/pest": "^4.1",
@@ -46,5 +55,6 @@
       "pestphp/pest-plugin": true
     }
   },
-  "minimum-stability": "stable"
+  "minimum-stability": "stable",
+  "prefer-stable": true
 }
