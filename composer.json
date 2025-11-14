@@ -31,9 +31,9 @@
   ],
   "require": {
     "php-amqplib/php-amqplib": "^3.7",
-    "illuminate/contracts": "^12.37",
-    "illuminate/support": "^12.37",
-    "illuminate/console": "^12.37"
+    "illuminate/contracts": "^11.0 | ^12.37",
+    "illuminate/support": "^11.0 | ^12.37",
+    "illuminate/console": "^11.0 | ^12.37"
   },
   "require-dev": {
     "pestphp/pest": "^4.1",
