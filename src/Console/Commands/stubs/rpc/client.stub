@@ -11,7 +11,7 @@ class {{ class }} extends Client
     *
     * @return string
     */
-    protected function message(): string
+    protected function route(): string
     {
         return "";
     }
