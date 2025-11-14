@@ -77,7 +77,11 @@ class Router extends Server
                 $funcReturnValue = $this->callHandler(json_decode($request->getBody(), true));
                 $this->reply = $funcReturnValue ?? 'null';
             } else throw new RouteNotFoundException("route not found.");
-        } catch (RouteNotFoundException $e) {
+        }
+        //  catch (RouteNotFoundException $e) {
+        //     $this->reply = $e->getMessage();
+        // }
+        catch (Exception $e) {
             $this->reply = $e->getMessage();
         }
 

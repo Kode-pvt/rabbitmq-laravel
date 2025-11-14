@@ -46,10 +46,10 @@ abstract class Server implements IsConsumer
         if (! config('rabbitmq.router')) {
             $request = $req->getBody();
             info("Request received from client: " . $request);
-            $this->handle($request);
+            $this->handle($req);
 
-            $this->respond($req);
-            $req->ack();
+            // $this->respond($req);
+            // $req->ack();
         } else {
             $this->handle($req);
         }
@@ -63,7 +63,7 @@ abstract class Server implements IsConsumer
         $this->publisher->basic_publish($message, '', false, $req->get('reply_to'));
     }
 
-    abstract public function handle($request): void;
+    abstract public function handle(AMQPMessage $request): void;
     abstract protected function reply(): string;
 
     public function __destruct()

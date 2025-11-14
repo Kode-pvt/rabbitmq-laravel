@@ -11,8 +11,8 @@ class ExchangeService implements ExchangeServiceContract
 {
     public function __construct() {}
 
-    public function declare(string $name, ExchangeType $type): ?array
+    public function declare(string $name, ExchangeType $type, bool $passive = false, bool $durable = false, bool $autodelete = false): ?array
     {
-        return Connection::getChannel()->exchange_declare($name, $type->value, false, false, false);
+        return Connection::getChannel()->exchange_declare($name, $type->value, $passive, $durable, $autodelete);
     }
 }

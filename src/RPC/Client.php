@@ -3,11 +3,13 @@
 namespace KodePvt\RabbitmqLaravel\RPC;
 
 use KodePvt\RabbitmqLaravel\Contracts\IsConsumer;
+use KodePvt\RabbitmqLaravel\Exceptions\RequestTimeoutException;
 use KodePvt\RabbitmqLaravel\Facades\Connection;
 use KodePvt\RabbitmqLaravel\Facades\PublisherFactory;
 use KodePvt\RabbitmqLaravel\Facades\Queue;
 use KodePvt\RabbitmqLaravel\Helpers\Helpers;
 use KodePvt\RabbitmqLaravel\Services\Core\Message;
+use PhpAmqpLib\Channel\AMQPChannel;
 use PhpAmqpLib\Message\AMQPMessage;
 
 use function Laravel\Prompts\info;
@@ -22,6 +24,8 @@ abstract class Client implements IsConsumer
     private $queue;
 
     protected $queueName;
+
+    protected $timeout = 10; //seconds
 
     public function __construct()
     {
@@ -63,9 +67,14 @@ abstract class Client implements IsConsumer
         $publisher->basic_publish($message, config('rabbitmq.rpc_exchange'), false, $this->route());
         info("request sent to the server.");
 
-        spin(function () {
+        $startTime = now();
+        $endtime = $startTime->addSeconds($this->timeout);
+        spin(function () use ($endtime) {
             while (!$this->response) {
-                $this->channel->wait();
+                if ($endtime->lte(now())) {
+                    $this->response =  "Server not available.";
+                }
+                $this->channel->wait(null, true);
             }
         }, "Waiting for the response");
 
