@@ -65,20 +65,31 @@ abstract class Client implements IsConsumer
 
         $message = new Message($this->payload(), false, $messageProperties['correlation_id'], $messageProperties['reply_to']);
         $publisher->basic_publish($message, config('rabbitmq.rpc_exchange'), false, $this->route());
-        info("request sent to the server.");
 
-        $startTime = now();
-        $endtime = $startTime->addSeconds($this->timeout);
-        spin(function () use ($endtime) {
-            while (!$this->response) {
-                if ($endtime->lte(now())) {
-                    $this->response =  "Server not available.";
-                }
-                $this->channel->wait(null, true);
-            }
-        }, "Waiting for the response");
+
+
+        if (app()->runningInConsole()) {
+            info("request sent to the server.");
+            spin(function () {
+                $this->channelWait();
+            }, "Waiting for the response");
+        } else {
+            $this->channelWait();
+        }
 
         return $this->handle($this->response);
+    }
+
+    private function channelWait()
+    {
+        $startTime = now();
+        $endtime = $startTime->addSeconds($this->timeout);
+        while (!$this->response) {
+            if ($endtime->lte(now())) {
+                $this->response =  "Server not available.";
+            }
+            $this->channel->wait(null, true);
+        }
     }
 
     private function payload()
